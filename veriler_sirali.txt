@@ -1,0 +1,24 @@
+Media_Root
+  Music
+    Jazz
+      track3.mp3
+      track4.mp3
+    Pop
+      track1.mp3
+      track2.mp3
+  Photos
+    Events
+      photo3.jpg
+      photo4.jpg
+    Vacation
+      photo1.jpg
+      photo2.jpg
+  Videos
+    Documantaries
+      doc1.mp4
+      doc2.mp4
+    Movies
+      movie1.mp4
+      movie2.mp4
+Desktop
+  belgeler

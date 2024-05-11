@@ -1,10 +1,7 @@
 package TreeFile;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
+import java.io.*;
+import java.util.*;
 
 public class Node {
 	String name = null;
@@ -44,10 +41,16 @@ public class Node {
 
 	}
 
-	static void display(int level, Node node) {
-		System.out.print(node.name.indent(level * 2));
-		for (Node child : node.children) {
-			display(level + 1, child);
+	static void writeToFile(int level, Node node, BufferedWriter writer) {
+		try {
+
+			writer.write(node.name.indent(level * 2));
+			for (Node child : node.children) {
+				writeToFile(level + 1, child, writer);
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 
