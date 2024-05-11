@@ -51,18 +51,7 @@ public class Node {
 		}
 	}
 
-	public static Node getNode(String name) {
-		for (Node node : TreeFile.roots) {
-			if (node.name.equals(name)) {
-				return node;
-			}
-
-		}
-		Node newNode = new Node("");
-		return newNode;
-	}
-
-	public static void deleteNode(String path,Node node) {
+	public static void deleteNode(String path, Node node) {
 		String[] parts = path.split("/");
 		Node current = node;
 		boolean found = false;
