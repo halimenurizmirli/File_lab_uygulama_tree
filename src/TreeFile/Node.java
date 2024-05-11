@@ -113,13 +113,13 @@ public class Node {
 		System.out.println("Node not found");
 	}
 
-	private static Boolean isSearchNode(String name, Node node) {
+	public static Boolean searchNode(String name, Node node) {
 		Node current = node;
 		if (current.name.equals(name)) {
 			return true;
 		} else {
 			for (Node child : current.children) {
-				if (isSearchNode(name, child)) {
+				if (searchNode(name, child)) {
 					return true;
 				}
 			}
@@ -128,13 +128,14 @@ public class Node {
 		return false;
 	}
 
-	public static void searchNode(String name, Node node) {
-		if (isSearchNode(name, node)) {
-			System.out.println("Node found. The path is: " + findPath(name, node));
-		} else {
-			System.out.println("Node not found");
-		}
-	}
+//	public static boolean searchNode(String name, Node node) {
+//		if (isSearchNode(name, node)) {
+//			System.out.println("Node found. The path is: " + findPath(name, node));
+//			return true;
+//		} else {
+//			return false;
+//		}
+//	}
 
 	public static String findPath(String fileName, Node node) {
 		// Dosya adı verilen dosyayı içeren düğümün yolunu bulmak için derinlemesine

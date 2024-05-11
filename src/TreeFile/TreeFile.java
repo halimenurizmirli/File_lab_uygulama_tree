@@ -54,7 +54,6 @@ public class TreeFile {
 			}
 			writer.close();
 
-			System.out.println("\n");
 			readFile();
 
 			Scanner scanner = new Scanner(System.in);
@@ -63,7 +62,21 @@ public class TreeFile {
 //			String path = scanner.nextLine();
 //
 //			Node.deleteNode(path, root);
-//			Node.display(0, root);
+			
+			System.out.println("Enter the name to searching: ");
+			String name = scanner.nextLine();
+			boolean found = false;
+			for (Node n : roots) {
+				if(Node.searchNode(name,n)) {
+					System.out.println("Node found. The path is: " + Node.findPath(name, n));
+					found=true;
+					break;
+				}
+					
+			}
+			if(!found) {
+				System.out.println("Node not found");
+			}
 
 //			System.out.println("Select traversal method:");
 //			System.out.println("1. In-Order");
