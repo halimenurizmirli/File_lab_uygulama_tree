@@ -1,12 +1,13 @@
 package TreeFile;
 
+import java.io.*;
 import java.util.*;
 
 public class TreeFile {
 
 	public static void main(String[] args) {
 		class Node {
-			String name;
+			String name =null;
 			List<Node> children;
 
 			Node(String name) {
@@ -189,30 +190,55 @@ public class TreeFile {
 		}
 
 		// main
-		Node root = new Node("Media_Root");
-		root.addChildren("Media_Root/Videos");
-		root.addChildren("Media_Root/Music/Pop/track2.mp3");
-		root.addChildren("Media_Root/Photos");
-		root.addChildren("Media_Root/Music/Pop/track1.mp3");
-		root.addChildren("Media_Root/Music/Jazz/track4.mp3");
-		root.addChildren("Media_Root/Music/Jazz/track3.mp3");
-		root.addChildren("Media_Root/Photos/Vacation/photo1.jpg");
-		root.addChildren("Media_Root/Photos/Vacation/photo2.jpg");
-		root.addChildren("Media_Root/Photos/Events/photo3.jpg");
-		root.addChildren("Media_Root/Photos/Events/photo4.jpg");
-		root.addChildren("Media_Root/Videos/Movies/movie1.mp4");
-		root.addChildren("Media_Root/Videos/Documantaries/doc2.mp4");
-		root.addChildren("Media_Root/Videos/Movies/movie2.mp4");
-		root.addChildren("Media_Root/Videos/Documantaries/doc1.mp4");
-		root.display(0);
+		List<Node> roots = new ArrayList<Node>();
+		try {
+            BufferedReader reader = new BufferedReader(new FileReader("veriler.txt"));
+            String line;
+            Node root = null;
+            while ((line = reader.readLine()) != null) {
+            	String[] path = line.split("/");
+            	if(root==null) {
+            		root=new Node(path[0]);
+            	}
+            	else if(!root.name.equals(path[0])) {
+            		root =new Node(path[0]);
+            	}
+            	else {
+            		
+                }
+            	
+            	for (int i = 1; i < path.length; i++) {
+					String nodeName = path[i];
+					root.addChildren(nodeName);
+            	}
+            	
+            	roots.add(root);
+            	
+            	}
+            	
+            	
+                
+            
+            for(Node n : roots) {
+            	n.display(0);
+            }
+            
+            reader.close();
+        } catch (IOException e) {
+            System.err.println("Dosya okuma hatası: " + e.getMessage());
+        }
+		
+		
+		
+		
 
 		Scanner scanner = new Scanner(System.in);
 
 		System.out.println("Enter the path to deleting file: ");
 		String path = scanner.nextLine();
 
-		root.deleteNode(path);
-		root.display(0);
+//		root.deleteNode(path);
+//		root.display(0);
 
 		System.out.println("Select traversal method:");
 		System.out.println("1. In-Order");
@@ -221,23 +247,23 @@ public class TreeFile {
 		int traversalType = scanner.nextInt();
 		scanner.nextLine();
 
-		switch (traversalType) {
-		case 1:
-			System.out.println("In-order traversal:");
-			root.inOrderTraversal(root);
-			break;
-		case 2:
-			System.out.println("Pre-order traversal:");
-			root.preOrderTraversal(root);
-			break;
-		case 3:
-			System.out.println("Post-order traversal:");
-			root.postOrderTraversal(root);
-			break;
-		default:
-			System.out.println("Invalid traversal type.");
-			break;
-		}
+//		switch (traversalType) {
+//		case 1:
+//			System.out.println("In-order traversal:");
+//			root.inOrderTraversal(root);
+//			break;
+//		case 2:
+//			System.out.println("Pre-order traversal:");
+//			root.preOrderTraversal(root);
+//			break;
+//		case 3:
+//			System.out.println("Post-order traversal:");
+//			root.postOrderTraversal(root);
+//			break;
+//		default:
+//			System.out.println("Invalid traversal type.");
+//			break;
+//		}
 
 		scanner.close();
 

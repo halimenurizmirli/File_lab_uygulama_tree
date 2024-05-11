@@ -1,0 +1,17 @@
+Media_Root
+Desktop
+Media_Root/Videos
+Media_Root/Music/Pop/track2.mp3
+Media_Root/Photos
+Media_Root/Music/Pop/track1.mp3
+Media_Root/Photos/Events/photo4.jpg
+Media_Root/Music/Jazz/track4.mp3
+Media_Root/Music/Jazz/track3.mp3
+Media_Root/Photos/Vacation/photo1.jpg
+Media_Root/Videos/Movies/movie2.mp4
+Media_Root/Photos/Vacation/photo2.jpg
+Media_Root/Photos/Events/photo3.jpg
+Media_Root/Videos/Movies/movie1.mp4
+Media_Root/Videos/Documantaries/doc2.mp4
+Media_Root/Videos/Documantaries/doc1.mp4
+Desktop/belgeler
