@@ -18,6 +18,7 @@ public class Node {
 		for (int i = 1; i < path.length; i++) {
 			String directory = path[i];
 			Node child = null;
+			
 			for (Node existingChild : current.children) {
 				if (existingChild.name.equals(directory)) {
 					child = existingChild;
@@ -38,7 +39,6 @@ public class Node {
 		public int compare(Node n1, Node n2) {
 			return n1.name.compareTo(n2.name);
 		}
-
 	}
 
 	static void writeToFile(int level, Node node, BufferedWriter writer) {
@@ -55,16 +55,19 @@ public class Node {
 	}
 
 	public static void deleteNode(String path, Node node) {
+		// Yolu "/" karakterine göre ayır
 		String[] parts = path.split("/");
 		Node current = node;
 		boolean found = false;
+		
+        // Başlangıç düğümüne ulaşırsa
 		if (current.name.equals(parts[0])) {
 
 			// Düğümleri yol boyunca takip et
 			for (int i = 1; i < parts.length - 1; i++) {
 				String nodeName = parts[i];
 				found = false;
-
+				
 				// Çocukları ara
 				for (Node child : current.children) {
 					if (child.name.equals(nodeName)) {
@@ -73,13 +76,14 @@ public class Node {
 						break;
 					}
 				}
+				// Yol boyunca düğüm bulunamazsa hata mesajı yazdır
 				if (!found) {
 					System.out.println("Node not found");
 					return;
 				}
 
 			}
-
+			// Son düğümü doğrula
 			String nodeName = parts[parts.length - 1];
 			for (Node child : current.children) {
 				if (child.name.equals(nodeName)) {
@@ -87,6 +91,7 @@ public class Node {
 					break;
 				}
 			}
+			//BUlunamazsa hata mesajı yazdır.
 			if (!found) {
 				System.out.println("Node not found");
 				return;
@@ -115,9 +120,11 @@ public class Node {
 
 	public static Boolean searchNode(String name, Node node) {
 		Node current = node;
+		// Şu anki düğümün adını kontrol et
 		if (current.name.equals(name)) {
 			return true;
 		} else {
+			// Düğümün çocuklarına bak
 			for (Node child : current.children) {
 				if (searchNode(name, child)) {
 					return true;
@@ -128,33 +135,21 @@ public class Node {
 		return false;
 	}
 
-//	public static boolean searchNode(String name, Node node) {
-//		if (isSearchNode(name, node)) {
-//			System.out.println("Node found. The path is: " + findPath(name, node));
-//			return true;
-//		} else {
-//			return false;
-//		}
+//	public static String findPath(String fileName, Node node) {
+//		// Dosya adı verilen dosyayı içeren düğümün yolunu bulmak için derinlemesine arama yapılır
+//		return findPathRecursive(node, fileName, "");
 //	}
 
-	public static String findPath(String fileName, Node node) {
-		// Dosya adı verilen dosyayı içeren düğümün yolunu bulmak için derinlemesine
-		// arama yapılır
-		return findPathRecursive(node, fileName, "");
-	}
-
-	private static String findPathRecursive(Node node, String fileName, String currentPath) {
-		// Geçerli düğümün adı belirtilen dosya adıyla eşleşirse, dosyanın yolu bulunmuş
-		// olur
+	public static String findPath(Node node, String fileName, String currentPath) {
+		// Geçerli düğümün adı belirtilen dosya adıyla eşleşirse, dosyanın yolu bulunmuş olur
 		if (node.name.equals(fileName)) {
 			return currentPath + node.name;
 		}
 
 		// Dosya adı verilen dosya bu düğümde bulunamazsa, alt düğümlere bakılır
 		for (Node child : node.children) {
-			// Yolun devamı olarak bu düğümün adı eklenir ve alt düğümlere doğru arama devam
-			// eder
-			String path = findPathRecursive(child, fileName, currentPath + node.name + "/");
+			// Yolun devamı olarak bu düğümün adı eklenir ve alt düğümlere doğru arama devam eder
+			String path = findPath(child, fileName, currentPath + node.name + "/");
 			// Eğer dosyanın yolunu bulmuşsak, bu yolu döndürürüz
 			if (path != null) {
 				return path;

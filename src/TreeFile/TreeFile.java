@@ -43,65 +43,68 @@ public class TreeFile {
 				root = singletion(path[0]);
 
 				Node.addChildren(line, root);
-
 			}
 
 			reader.close();
+			
 			BufferedWriter writer = new BufferedWriter(new FileWriter("veriler_sirali.txt"));
-
+			//bütün kök düğümler yeni dosyaya sıralı bir şekilde eklenir.			
 			for (Node n : roots) {
 				Node.writeToFile(0, n, writer);
 			}
 			writer.close();
-
+			
+			//dosyayı ekrana bastır
 			readFile();
 
 			Scanner scanner = new Scanner(System.in);
 
-//			System.out.println("Enter the path to deleting file: ");
-//			String path = scanner.nextLine();
-//
-//			Node.deleteNode(path, root);
-			
+			System.out.println("Enter the path to deleting file: ");
+			String path = scanner.nextLine();
+			for (Node root1 : roots) {
+			Node.deleteNode(path, roots.get(0));
+			}
+
 			System.out.println("Enter the name to searching: ");
 			String name = scanner.nextLine();
 			boolean found = false;
-			for (Node n : roots) {
-				if(Node.searchNode(name,n)) {
-					System.out.println("Node found. The path is: " + Node.findPath(name, n));
-					found=true;
+			for (Node root2 : roots) {
+				if (Node.searchNode(name, root2)) {
+					System.out.println("Node found. The path is: " + Node.findPath(root2,name,"" ));
+					found = true;
 					break;
 				}
-					
+
 			}
-			if(!found) {
+			if (!found) {
 				System.out.println("Node not found");
 			}
 
-//			System.out.println("Select traversal method:");
-//			System.out.println("1. In-Order");
-//			System.out.println("2. Pre-Order");
-//			System.out.println("3. Post-Order");
-//			int traversalType = scanner.nextInt();
-//			scanner.nextLine();
-//
-//			switch (traversalType) {
-//			case 1:
-//				System.out.println("In-order traversal:");
-//				Node.inOrderTraversal(root);
-//				break;
-//			case 2:
-//				System.out.println("Pre-order traversal:");
-//				Node.preOrderTraversal(root);
-//				break;
-//			case 3:
-//				System.out.println("Post-order traversal:");
-//				Node.postOrderTraversal(root);
-//				break;
-//			default:
-//				System.out.println("Invalid traversal type.");
-//				break;
-//			}
+			System.out.println("Select traversal method:");
+			System.out.println("1. In-Order");
+			System.out.println("2. Pre-Order");
+			System.out.println("3. Post-Order");
+			int traversalType = scanner.nextInt();
+			scanner.nextLine();
+			for(Node root3: roots) {
+			switch (traversalType) {
+			case 1:
+				System.out.println("In-order traversal:");
+				Node.inOrderTraversal(root3);
+				break;
+			case 2:
+				System.out.println("Pre-order traversal:");
+				Node.preOrderTraversal(root3);
+				break;
+			case 3:
+				System.out.println("Post-order traversal:");
+				Node.postOrderTraversal(root3);
+				break;
+			default:
+				System.out.println("Invalid traversal type.");
+				break;
+			}
+			}
 
 			scanner.close();
 		} catch (IOException e) {
